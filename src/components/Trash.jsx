@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axios";
 import React, { useEffect, useState } from "react";
 
 function Trash() {
@@ -6,7 +6,7 @@ function Trash() {
 
     async function fetchTrashedBlogs() {
         try {
-            const response = await axios.get('http://localhost:8000/blog/trash-blogs', { withCredentials: true });
+            const response = await axios.get('/blog/trash-blogs', { withCredentials: true });
             setTrashedBlogs(response.data.trashedBlogs);
         } catch (error) {
             console.log("Error fetching trashed blogs: ", error);

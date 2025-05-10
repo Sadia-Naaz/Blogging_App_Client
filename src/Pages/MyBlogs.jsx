@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import axios from '../../axios';
 
 import ButtonComponent from '../components/ButtonComponent';
 import FormContainer from '../components/FormContainer';
@@ -16,11 +16,11 @@ const[user,setUser] = useState([]);
 async function fetchMyBlogs (skipParam = 0){
 
 try{
-      const userDetails =  await axios.get('http://localhost:8000/user/user-info',{withCredentials:true});
+      const userDetails =  await axios.get('/user/user-info',{withCredentials:true});
        console.log(userDetails.data.UserInfo)
        setUser(userDetails.data.UserInfo);
        
-       const response = await axios.get(`http://localhost:8000/blog/read-my-blogs?skip=${skipParam}`,{withCredentials:true} );
+       const response = await axios.get(`/blog/read-my-blogs?skip=${skipParam}`,{withCredentials:true} );
        const newBlogs =  response.data.data;
        console.log(newBlogs)
        if(!newBlogs || newBlogs.length===0){
@@ -41,7 +41,7 @@ console.error(error);
 async function deleteBlog(blogID){
   try
   {
-       const response = await axios.post(`http://localhost:8000/blog/delete-blogs`,{blogID},{withCredentials:true});
+       const response = await axios.post(`/blog/delete-blogs`,{blogID},{withCredentials:true});
        console.log(response.data);
        setBlogs((prevBlogs)=>prevBlogs.filter(blog=>blogID!==blog._id));
   }
@@ -57,7 +57,7 @@ async function deleteBlog(blogID){
      e.preventDefault();
      try {
   
-      const response = await axios.post('http://localhost:8000/blog/edit-blogs', { 
+      const response = await axios.post('/blog/edit-blogs', { 
           blogID: currentBlog._id, 
           title: currentBlog.title, 
           textBody: currentBlog.textBody 
@@ -89,7 +89,7 @@ useEffect(()=>{
         title={blog.title}
         textBody={blog.textBody}
         username={user.username}
-        src={`http://localhost:8000${blog.image}`} 
+        src={`${import.meta.env.VITE_BACKEND_URL}${blog.image}`} 
         confirmDelete={() => confirmDelete(blog._id)}
         openEditForm={() => openEditForm(blog)}
       />

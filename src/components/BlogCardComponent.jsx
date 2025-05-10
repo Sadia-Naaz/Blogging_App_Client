@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { MdDelete } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
-import axios from 'axios';
+import axios from '../../axios';
 import { useEffect } from 'react';
 import ButtonComponent from './ButtonComponent';
  
@@ -16,7 +16,7 @@ const BlogCardComponent = ({title, textBody, username, src, confirmDelete, openE
 
   const handleLike = async (blogID) => {
     try {
-      const response = await axios.post(`http://localhost:8000/blog/like`, {blogID}, {withCredentials: true});
+      const response = await axios.post(`/blog/like`, {blogID}, {withCredentials: true});
       if (response.data.success) {
         setLikes(response.data.likes);
         setLiked(response.data.liked);
@@ -30,7 +30,7 @@ const BlogCardComponent = ({title, textBody, username, src, confirmDelete, openE
   const handleComment = async (blogID) => {
     if (!text.trim()) return;
     try {
-      const response = await axios.post(`http://localhost:8000/blog/comment`, {blogID, text}, {withCredentials: true});  
+      const response = await axios.post(`/blog/comment`, {blogID, text}, {withCredentials: true});  
       if (response.data.success) {
         setComments([...comments, {text}]);
         setText(""); // Clear the input after posting
@@ -42,7 +42,7 @@ const BlogCardComponent = ({title, textBody, username, src, confirmDelete, openE
   }
  
   const handleShare = async () => {
-    const blogURL = `http://localhost:3000/blog/${blogID}`;
+    const blogURL = `/blog/${blogID}`;
     navigator.clipboard.writeText(blogURL)
     .then(() => {
       alert('Link copied to clipboard');
@@ -52,7 +52,7 @@ const BlogCardComponent = ({title, textBody, username, src, confirmDelete, openE
   }
   const fetchComments =async(blogID)=>{
     try{
-       const response = await axios.get(`http://localhost:8000/blog/readComments/${blogID}`,{withCredentials:true});
+       const response = await axios.get(`/blog/readComments/${blogID}`,{withCredentials:true});
        const commentData = response.data.data;
        console.log(commentData,"commentData");
        return commentData;
@@ -79,7 +79,7 @@ const BlogCardComponent = ({title, textBody, username, src, confirmDelete, openE
   useEffect(() => {
     const fetchBlogDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/blog/${blogID}`, {withCredentials: true});
+        const response = await axios.get(`/blog/${blogID}`, {withCredentials: true});
         if (response.data.success) {
           setLikes(response.data.likes || 0);
           setLiked(response.data.likedByUser || false);

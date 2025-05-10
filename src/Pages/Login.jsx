@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -20,7 +20,7 @@ const Login = () => {
   const handleSubmit = async(e)=>{
   e.preventDefault();
   try{
-    const {data} = await axios.post("http://localhost:8000/auth/login",{
+    const {data} = await axios.post("/auth/login",{
       loginID:inputs.loginID,
       password:inputs.password,
     },

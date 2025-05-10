@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { authActions } from '../redux/store';
-import axios from "axios";
+import axios from "../../axios";
 import { useEffect } from 'react';
 import ButtonComponent from './ButtonComponent';
 import { useLocation } from 'react-router-dom';
@@ -25,7 +25,7 @@ const Header = ({setCurrentTab}) => {
   const handleLogOut = async()=>{
     dispatch(authActions.logout());
     try{
-       const{data} = await axios.post("http://localhost:8000/auth/logout",{},{withCredentials:true});
+       const{data} = await axios.post("/auth/logout",{},{withCredentials:true});
        if(data.success){
         alert("sign-out successfully!");
         navigate("/");

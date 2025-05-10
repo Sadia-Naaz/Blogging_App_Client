@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axios";
 import React, { useEffect, useState} from "react";
 import BlogContainer from "../components/BlogContainer";
 
@@ -18,7 +18,7 @@ function UserInfo() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/user/user-info', { withCredentials: true });
+            const response = await axios.get('/user/user-info', { withCredentials: true });
             console.log(response.data.UserInfo);
             setUser(response.data.UserInfo);
         } catch (error) {
@@ -33,7 +33,7 @@ function UserInfo() {
     const followerList = async (skipParam = 0) => {
         if (isFollowerList && skipParam === 0) return;
         try {
-            const response = await axios.get(`http://localhost:8000/follow/follower-list?skip=${skipParam}`, { withCredentials: true });
+            const response = await axios.get(`/follow/follower-list?skip=${skipParam}`, { withCredentials: true });
             const newFollowers = response.data.followerDb;
             console.log(response.data)
             console.log("newFollowers",newFollowers)
@@ -56,7 +56,7 @@ function UserInfo() {
     const followingList = async (skipParam = 0) => {
         if (isFollowingList && skipParam === 0) return;
         try {
-            const response = await axios.get(`http://localhost:8000/follow/following-list?skip=${skipParam}`, { withCredentials: true });
+            const response = await axios.get(`/follow/following-list?skip=${skipParam}`, { withCredentials: true });
             const newFollowings = response.data.followingDb;
             console.log("newFollowings",newFollowings);
             if(newFollowings.length===0){
@@ -76,7 +76,7 @@ function UserInfo() {
 
     const unfollow = async (userId) => {
         try {
-            await axios.post('http://localhost:8000/follow/unfollow-user', { unfollowId: userId }, { withCredentials: true });
+            await axios.post('/follow/unfollow-user', { unfollowId: userId }, { withCredentials: true });
             setAllFollowings((prevFollowings) => prevFollowings.filter(following => following.following._id !== userId));
         } catch (error) {
             console.log(error);
