@@ -20,7 +20,7 @@ const CreateBlog = () => {
       console.log(pair[0], pair[1]);
     }
     try{
-     const response = await axios.post("/blog/create-blog",formData,{withCredentials:true});
+     const response = await axios.post("/blog/create-blog",formData);
      console.log(response);
      if(response.data.status!==201){
      alert(response.data.error);

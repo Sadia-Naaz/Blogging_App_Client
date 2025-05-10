@@ -53,11 +53,11 @@ useEffect(()=>{
     try {
         if (following[userID]) {
             // Unfollow
-            const response = await axios.post('/follow/unfollow-user', { unfollowUserID: userID }, { withCredentials: true });
+            const response = await axios.post('/follow/unfollow-user', { unfollowUserID: userID });
             console.log(response.data.message)
         } else {
             // Follow
-            await axios.post('/follow/follow-user', { followingUserId: userID }, { withCredentials: true });
+            await axios.post('/follow/follow-user', { followingUserId: userID });
         }
         setFollowing((prevFollowing) => ({
             ...prevFollowing,
@@ -82,7 +82,7 @@ useEffect(()=>{
 
     const fetchFollowing=async()=>{
       try{
-        const response = await axios.get("/follow/following-list",{withCredentials:true});
+        const response = await axios.get("/follow/following-list");
         console.log("following-List",response.data.followingListDB);
          const newFollowings = response.data.followingListDB;
          console.log('newFollowings',newFollowings);

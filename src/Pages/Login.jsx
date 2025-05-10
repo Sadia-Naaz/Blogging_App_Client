@@ -23,8 +23,7 @@ const Login = () => {
     const {data} = await axios.post("/auth/login",{
       loginID:inputs.loginID,
       password:inputs.password,
-    },
-  {withCredentials:true}
+    }
   );
     if(data.success){
       alert(data.message)
