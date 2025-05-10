@@ -52,7 +52,7 @@ const Header = ({setCurrentTab}) => {
             </ul>
         )}
          {!isLogin &&(  
-          <div>
+          <div className='flex justify-center align-center gap-8'>
            <Link to="/register"><ButtonComponent text="Sign-UP"/></Link>
            <Link to='/login'><ButtonComponent text='Login'/></Link>  
           </div>
@@ -60,7 +60,7 @@ const Header = ({setCurrentTab}) => {
           )}
           {
             isLogin && (
-              <div className='flex gap-5'>
+              <div className='flex justify-center align-center gap-8'>
 
                 <Link to="/trash-blogs"><ButtonComponent text="Trash Bin"/></Link>
                 <Link to="/user-info"><ButtonComponent text="Profile"/></Link>
