@@ -16,7 +16,7 @@ const BlogCardComponent = ({title, textBody, username, src, confirmDelete, openE
 
   const handleLike = async (blogID) => {
     try {
-      const response = await axios.post(`/blog/like`, {blogID}, {withCredentials: true});
+      const response = await axios.post(`/blog/like`, {blogID});
       if (response.data.success) {
         setLikes(response.data.likes);
         setLiked(response.data.liked);
@@ -30,7 +30,7 @@ const BlogCardComponent = ({title, textBody, username, src, confirmDelete, openE
   const handleComment = async (blogID) => {
     if (!text.trim()) return;
     try {
-      const response = await axios.post(`/blog/comment`, {blogID, text}, {withCredentials: true});  
+      const response = await axios.post(`/blog/comment`, {blogID, text});  
       if (response.data.success) {
         setComments([...comments, {text}]);
         setText(""); // Clear the input after posting
@@ -52,7 +52,7 @@ const BlogCardComponent = ({title, textBody, username, src, confirmDelete, openE
   }
   const fetchComments =async(blogID)=>{
     try{
-       const response = await axios.get(`/blog/readComments/${blogID}`,{withCredentials:true});
+       const response = await axios.get(`/blog/readComments/${blogID}`);
        const commentData = response.data.data;
        console.log(commentData,"commentData");
        return commentData;
@@ -79,7 +79,7 @@ const BlogCardComponent = ({title, textBody, username, src, confirmDelete, openE
   useEffect(() => {
     const fetchBlogDetails = async () => {
       try {
-        const response = await axios.get(`/blog/${blogID}`, {withCredentials: true});
+        const response = await axios.get(`/blog/${blogID}`);
         if (response.data.success) {
           setLikes(response.data.likes || 0);
           setLiked(response.data.likedByUser || false);

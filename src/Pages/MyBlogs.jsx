@@ -16,11 +16,11 @@ const[user,setUser] = useState([]);
 async function fetchMyBlogs (skipParam = 0){
 
 try{
-      const userDetails =  await axios.get('/user/user-info',{withCredentials:true});
+      const userDetails =  await axios.get('/user/user-info');
        console.log(userDetails.data.UserInfo)
        setUser(userDetails.data.UserInfo);
        
-       const response = await axios.get(`/blog/read-my-blogs?skip=${skipParam}`,{withCredentials:true} );
+       const response = await axios.get(`/blog/read-my-blogs?skip=${skipParam}` );
        const newBlogs =  response.data.data;
        console.log(newBlogs)
        if(!newBlogs || newBlogs.length===0){
@@ -41,7 +41,7 @@ console.error(error);
 async function deleteBlog(blogID){
   try
   {
-       const response = await axios.post(`/blog/delete-blogs`,{blogID},{withCredentials:true});
+       const response = await axios.post(`/blog/delete-blogs`,{blogID});
        console.log(response.data);
        setBlogs((prevBlogs)=>prevBlogs.filter(blog=>blogID!==blog._id));
   }
@@ -61,7 +61,7 @@ async function deleteBlog(blogID){
           blogID: currentBlog._id, 
           title: currentBlog.title, 
           textBody: currentBlog.textBody 
-      }, { withCredentials: true });
+      });
       setBlogs((prevBlogs) => prevBlogs.map(blog => blog._id === currentBlog._id ? { ...blog, title: currentBlog.title, textBody: currentBlog.textBody } : blog));
       setIsEditing(false);
   } 

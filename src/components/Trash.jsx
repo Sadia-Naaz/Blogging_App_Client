@@ -6,7 +6,7 @@ function Trash() {
 
     async function fetchTrashedBlogs() {
         try {
-            const response = await axios.get('/blog/trash-blogs', { withCredentials: true });
+            const response = await axios.get('/blog/trash-blogs');
             setTrashedBlogs(response.data.trashedBlogs);
         } catch (error) {
             console.log("Error fetching trashed blogs: ", error);
@@ -15,7 +15,7 @@ function Trash() {
 
     const restoreBlog = async (blogID) => {
         try {
-            await axios.post('http://localhost:8000/blog/restore-blogs', { blogID }, { withCredentials: true });
+            await axios.post('/blog/restore-blogs', { blogID });
             setTrashedBlogs((prevBlogs) => prevBlogs.filter(blog => blog._id !== blogID));
         } catch (error) {
             console.log("Error in restoring blog: ", error.toString());

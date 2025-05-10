@@ -25,7 +25,7 @@ const Header = ({setCurrentTab}) => {
   const handleLogOut = async()=>{
     dispatch(authActions.logout());
     try{
-       const{data} = await axios.post("/auth/logout",{},{withCredentials:true});
+       const{data} = await axios.post("/auth/logout",{});
        if(data.success){
         alert("sign-out successfully!");
         navigate("/");
