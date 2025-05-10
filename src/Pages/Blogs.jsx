@@ -1,4 +1,5 @@
-import axios from '../../axios';
+// import axios from '../../axios';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import BlogContainer from '../components/BlogContainer';
 import BlogCardComponent from '../components/BlogCardComponent';
@@ -17,7 +18,7 @@ const Blogs = ({currentTab}) => {
 //in order to fetch userDetails 
 try
  { 
-  const blogData = await axios.get(`/blog/read-blogs?skip=${skipParam}`,{withCredentials:true});
+  const blogData = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/blog/read-blogs?skip=${skipParam}`,{withCredentials:true});
   const newBlogs = blogData.data.data
   console.log('newBlogs',blogData)
   console.log(`message : ${blogData.data.message}  status : ${blogData.data.status}`);
@@ -53,11 +54,11 @@ useEffect(()=>{
     try {
         if (following[userID]) {
             // Unfollow
-            const response = await axios.post('/follow/unfollow-user', { unfollowUserID: userID });
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/follow/unfollow-user`, { unfollowUserID: userID },{withCredentials:true});
             console.log(response.data.message)
         } else {
             // Follow
-            await axios.post('/follow/follow-user', { followingUserId: userID });
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/follow/follow-user`, { followingUserId: userID },{withCredentials:true});
         }
         setFollowing((prevFollowing) => ({
             ...prevFollowing,
@@ -82,7 +83,7 @@ useEffect(()=>{
 
     const fetchFollowing=async()=>{
       try{
-        const response = await axios.get("/follow/following-list");
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/follow/following-list`,{withCredentials:true});
         console.log("following-List",response.data.followingListDB);
          const newFollowings = response.data.followingListDB;
          console.log('newFollowings',newFollowings);
