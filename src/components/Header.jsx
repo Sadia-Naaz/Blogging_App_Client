@@ -6,6 +6,7 @@ import axios from "../../axios";
 import { useEffect } from 'react';
 import ButtonComponent from './ButtonComponent';
 import { useLocation } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
 const Header = ({setCurrentTab}) => {
   const [value, setValue] = useState(""); // Initialize active tab state
 
@@ -38,7 +39,7 @@ const Header = ({setCurrentTab}) => {
   return (
     <>
         <nav className='flex justify-between align-center p-4 bg-gray-600 shadow-lg sticky top-0'>
-          <h2 className='font-bold text-2xl text-white'>Thought-Trail</h2>
+          <h2 className='font-bold text-2xl text-white'>BlogVerse</h2>
          {isLogin &&  (
           <ul className='flex justify-center align-center gap-8'>
             <input
@@ -53,8 +54,8 @@ const Header = ({setCurrentTab}) => {
         )}
          {!isLogin &&(  
           <div className='flex justify-center align-center gap-8'>
-           <Link to="/register"><ButtonComponent text="Sign-UP"/></Link>
-           <Link to='/login'><ButtonComponent text='Login'/></Link>  
+
+           <Link to='/login'><Button>Login</Button></Link>  
           </div>
             
           )}

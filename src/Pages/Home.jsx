@@ -1,12 +1,23 @@
 import React from 'react'
+import { Button } from "@/components/ui/button";
+import ButtonComponent from '@/components/ButtonComponent';
+import { Link } from 'react-router-dom';
+import HeroSection from '@/LandingPageComponents/HeroSection';
+import FeaturesSection from '@/LandingPageComponents/Features';
+import BlogPreviewSection from '@/LandingPageComponents/BlogPreviewSection';
+import AboutSection from '@/LandingPageComponents/AboutSection';
+import CTASection from '@/LandingPageComponents/CTASection';
+import Footer from '@/LandingPageComponents/Footer';
 const Home = () => {
 
   return (
   <div>
-  <h1 className='text-lg'> Don't let your precious moments fly away,share your journey with the world</h1>
-  <h2>Sign Up to start your journey right here!</h2>
-  
-
+   <HeroSection/>
+  <FeaturesSection/>
+  <BlogPreviewSection/>
+  <AboutSection/>
+  <CTASection/>
+  <Footer/>
   </div>
   
   )

@@ -20,10 +20,12 @@ const Login = () => {
   const handleSubmit = async(e)=>{
   e.preventDefault();
   try{
-    const {data} = await axios.post("/auth/login",{
+    console.log(import.meta.env.VITE_BACKEND_URL);
+    const {data} = await axios.post('/auth/login',{
       loginID:inputs.loginID,
       password:inputs.password,
-    }
+    },
+    
   );
     if(data.success){
       alert(data.message)

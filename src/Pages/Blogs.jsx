@@ -1,5 +1,5 @@
 // import axios from '../../axios';
-import axios from 'axios';
+import axios from '../../axios';
 import React, { useEffect, useState } from 'react'
 import BlogContainer from '../components/BlogContainer';
 import BlogCardComponent from '../components/BlogCardComponent';
@@ -18,7 +18,17 @@ const Blogs = ({currentTab}) => {
 //in order to fetch userDetails 
 try
  { 
-  const blogData = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/blog/read-blogs?skip=${skipParam}`,{withCredentials:true});
+  //after making the entire app I will optimize it.
+  //  const dispatch = useDispatch();
+  // const {list:blogs,loading,error} = useSelector(state=>state.blogs);
+  // useEffect(()=>{
+  //  if(blogs.length===0){
+  //   dispatch(FetchBlogs())//fetch is not fetched already
+  //  };
+  // },[dispatch,blogs.length])
+  // if(loading)return<p>...loading</p>
+  // if(error)return<p>Error:{error}</p>
+  const blogData = await axios.get(`/blog/read-blogs?skip=${skipParam}`,{withCredentials:true});
   const newBlogs = blogData.data.data
   console.log('newBlogs',blogData)
   console.log(`message : ${blogData.data.message}  status : ${blogData.data.status}`);

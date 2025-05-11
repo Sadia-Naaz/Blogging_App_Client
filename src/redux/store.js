@@ -1,3 +1,4 @@
+import Blogs from "@/Pages/Blogs";
 import {createSlice,configureStore} from"@reduxjs/toolkit";
 const authInitialState = {
 isLogin : localStorage.getItem("isLogin") ==="true" ? true :false,
@@ -17,4 +18,6 @@ const authSlice  = createSlice({
     }
 })
 export const authActions = authSlice.actions;
-export const store = configureStore({reducer:authSlice.reducer});
+export const store = configureStore({
+    reducer:authSlice.reducer,
+});
